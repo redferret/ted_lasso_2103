@@ -41,4 +41,16 @@ describe Team do
       expect(team.captain).to eq roy
     end
   end
+
+  context '#positions_filled' do
+    it 'returns the positions of all the players' do
+      roy = Player.new({name: "Roy Kent", position: "Center Midfielder" , salary: 1_000_000})
+      sam = Player.new({name: "Sam Obisanya", position: "Right-back Defender", salary: 600_000})
+      team = Team.new("AFC Richmond", "Ted Lasso", [roy, sam])
+
+      positions_filled = team.positions_filled
+      expected_positions = ["Center Midfielder", "Right-back Defender"]
+      expect(positions_filled).to eq expected_positions
+    end
+  end
 end
