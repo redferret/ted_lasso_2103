@@ -22,5 +22,13 @@ describe Team do
       expected_total = 1_600_000
       expect(total_salary).to eq expected_total
     end
+
+    it 'returns 0 when no players are present' do
+      team = Team.new("AFC Richmond", "Ted Lasso", [])
+
+      total_salary = team.total_salary
+      expected_total = 0
+      expect(total_salary).to eq expected_total
+    end
   end
 end
