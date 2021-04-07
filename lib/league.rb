@@ -11,19 +11,26 @@ class League
   end
 
   def captains
-    teams.map do |team|
+    @teams.map do |team|
       team.captain
     end
   end
 
   def players_by_team
     players_by_team_hash = Hash.new {|hash, new_key| hash[new_key] = []}
-    teams.each do |team|
+    @teams.each do |team|
       team.players.each do |player|
        players_by_team_hash[team] << player.name
       end
     end
     return players_by_team_hash
+  end
+
+  def most_expensive_player
+    team_with_most_expensive_player = @teams.max do |team_a, team_b|
+      team_a.captain.salary <=> team_b.captain.salary
+    end
+    return [team_with_most_expensive_player.captain]
   end
 
 end
