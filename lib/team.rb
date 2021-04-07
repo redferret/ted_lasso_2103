@@ -12,4 +12,8 @@ class Team
       total + player.salary
     end
   end
+
+  def captain
+    players.first
+  end
 end
