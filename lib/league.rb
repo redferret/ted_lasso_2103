@@ -33,4 +33,23 @@ class League
     return [team_with_most_expensive_player.captain]
   end
 
+  def players_by_salary_range
+    players_by_salary_range_hash = Hash.new {|hash, key| hash[key] = []}
+
+    @teams.each do |team|
+      6.times do |salary_range|
+        players_in_range = team.players.find_all do |player|
+          player.salary >= (salary_range * 1_000_000) and
+          player.salary < ((salary_range + 1) * 1_000_000)
+        end
+        players_in_range = players_in_range.map do |player|
+          player.name
+        end
+
+        players_by_salary_range_hash["Over #{salary_range}M"] += players_in_range
+      end
+    end
+    return players_by_salary_range_hash
+  end
+
 end
