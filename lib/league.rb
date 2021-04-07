@@ -11,7 +11,7 @@ class League
   end
 
   def captains
-    teams.select do |team|
+    teams.map do |team|
       team.captain
     end
   end
