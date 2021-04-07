@@ -7,5 +7,9 @@ class Team
     @players = players
   end
 
-  
+  def total_salary
+    players.inject(0) do |total, player|
+      total + player.salary
+    end
+  end
 end
