@@ -10,4 +10,10 @@ class League
     @teams << team
   end
 
+  def captains
+    teams.select do |team|
+      team.captain
+    end
+  end
+
 end
