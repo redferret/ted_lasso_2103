@@ -33,7 +33,7 @@ describe Team do
   end
 
   context '#captain' do
-    it 'returns the first player as captain' do
+    it 'returns the highest paid player as captain' do
       roy = Player.new({name: "Roy Kent", position: "Center Midfielder" , salary: 1_000_000})
       sam = Player.new({name: "Sam Obisanya", position: "Right-back Defender", salary: 600_000})
       team = Team.new("AFC Richmond", "Ted Lasso", [roy, sam])
