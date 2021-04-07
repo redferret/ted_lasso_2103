@@ -14,8 +14,8 @@ class Team
   end
 
   def captain
-    players.max do |player|
-      player.salary
+    players.max do |player_a, player_b|
+      player_a.salary <=> player_b.salary
     end
   end
 
