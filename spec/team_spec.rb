@@ -31,4 +31,14 @@ describe Team do
       expect(total_salary).to eq expected_total
     end
   end
+
+  context '#captain' do
+    it 'returns the first player as captain' do
+      roy = Player.new({name: "Roy Kent", position: "Center Midfielder" , salary: 1_000_000})
+      sam = Player.new({name: "Sam Obisanya", position: "Right-back Defender", salary: 600_000})
+      team = Team.new("AFC Richmond", "Ted Lasso", [roy, sam])
+
+      expect(team.captain).to eq roy
+    end
+  end
 end
