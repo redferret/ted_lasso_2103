@@ -67,7 +67,7 @@ describe League do
       league.add_team(manchester)
 
       expected_hash = {
-        richmond => ["Roy Kent", "Sam Obisanya"]
+        richmond => ["Roy Kent", "Sam Obisanya"],
         manchester => ["Jamie Tartt", "Fernandinho"]
       }
 
