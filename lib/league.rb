@@ -16,4 +16,14 @@ class League
     end
   end
 
+  def players_by_team
+    players_by_team_hash = Hash.new {|hash, new_key| hash[new_key] = []}
+    teams.each do |team|
+      team.players.each do |player|
+       players_by_team_hash[team] << player.name
+      end
+    end
+    return players_by_team_hash
+  end
+
 end
