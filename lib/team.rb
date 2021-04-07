@@ -14,7 +14,9 @@ class Team
   end
 
   def captain
-    players.first
+    players.max do |player|
+      player.salary
+    end
   end
 
   def positions_filled
