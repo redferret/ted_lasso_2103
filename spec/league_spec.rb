@@ -4,6 +4,21 @@ require './lib/player'
 require 'rspec'
 
 describe League do
+
+  before :each do
+    @roy = Player.new({name: "Roy Kent", position: "Center Midfielder" , salary: 1_000_000})
+    @sam = Player.new({name: "Sam Obisanya", position: "Right-back Defender", salary: 600_000})
+    @richmond = Team.new("AFC Richmond", "Ted Lasso", [@roy, @sam])
+
+    @jamie = Player.new({name: "Jamie Tartt", position: "Striker", salary: 1_500_000})
+    @fernandinho = Player.new({name: "Fernandinho", position: "Midfielder", salary: 5_200_000})
+    @manchester = Team.new("Manchester City FC", "Pep Guardiola", [@jamie, @fernandinho])
+
+    @league = League.new("Premier League")
+    @league.add_team(@richmond)
+    @league.add_team(@manchester)
+  end
+
   context '#initialize' do
     it 'exists' do
       league = League.new("Premier League")
@@ -91,8 +106,37 @@ describe League do
 
       most_expensive_player = league.most_expensive_player
       expected_player = [fernandinho]
-      
+
       expect(most_expensive_player).to eq expected_player
+    end
+  end
+
+  context '#players_by_salary_range' do
+    it 'returns each players sorted by range in a hash' do
+      roy = Player.new({name: "Roy Kent", position: "Center Midfielder" , salary: 1_000_000})
+      sam = Player.new({name: "Sam Obisanya", position: "Right-back Defender", salary: 600_000})
+      richmond = Team.new("AFC Richmond", "Ted Lasso", [roy, sam])
+
+      jamie = Player.new({name: "Jamie Tartt", position: "Striker", salary: 1_500_000})
+      fernandinho = Player.new({name: "Fernandinho", position: "Midfielder", salary: 5_200_000})
+      manchester = Team.new("Manchester City FC", "Pep Guardiola", [jamie, fernandinho])
+
+      league = League.new("Premier League")
+      league.add_team(richmond)
+      league.add_team(manchester)
+
+      expected_hash = {
+       "Over 0M" => ["Sam Obisanya"],
+       "Over 1M" => ["Roy Kent", "Jamie Tartt"],
+       "Over 2M" => [],
+       "Over 3M" => [],
+       "Over 4M" => [],
+       "Over 5M" => ["Fernandinho"],
+     }
+
+     players_by_salary_range_hash = league.players_by_salary_range
+
+     expect(players_by_salary_range_hash).to eq expected_hash
     end
   end
 
